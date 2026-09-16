@@ -1,0 +1,1 @@
+{"name":"carl-reader","version":"1.0.0","private":true,"type":"module","scripts":{"start":"node server.js","test":"node --test"},"dependencies":{"express":"^5.1.0","openai":"^5.20.0"}}
