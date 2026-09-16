@@ -3,7 +3,7 @@ import OpenAI from 'openai';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const app = express();
+export const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 app.disable('x-powered-by');
 app.use(express.json({ limit: '256kb' }));
@@ -32,6 +32,9 @@ app.post('/api/translate', async (req,res) => {
   }
 });
 
-app.get('*', (req,res) => res.sendFile(path.join(__dirname,'public','index.html')));
-const port = Number(process.env.PORT || 3000);
-app.listen(port, '0.0.0.0', () => console.log(`Carl Reader listening on ${port}`));
+app.get(/.*/, (req,res) => res.sendFile(path.join(__dirname,'public','index.html')));
+
+if (process.env.NODE_ENV !== 'test') {
+  const port = Number(process.env.PORT || 3000);
+  app.listen(port, '0.0.0.0', () => console.log(`Carl Reader listening on ${port}`));
+}
